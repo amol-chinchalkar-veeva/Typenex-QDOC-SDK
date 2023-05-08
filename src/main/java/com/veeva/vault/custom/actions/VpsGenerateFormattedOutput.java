@@ -48,6 +48,7 @@ public class VpsGenerateFormattedOutput implements RecordAction {
 
     /**
      * *
+     *
      * @param context
      */
     public void execute(RecordActionContext context) {
@@ -56,16 +57,16 @@ public class VpsGenerateFormattedOutput implements RecordAction {
             String recordId = record.getValue(OBJFIELD_ID, ValueType.STRING);
             String stateName = record.getValue(OBJFIELD_STATE, ValueType.STRING);
             recordIdsToSave.add(recordId);
-
-            if (!recordIdsToSave.isEmpty()) {
-                queueMessage(CONFIG_FO_ACTION_COMMUNICATION, recordIdsToSave);
-            }
-
         }
+
+        if (!recordIdsToSave.isEmpty()) {
+            queueMessage(CONFIG_FO_ACTION_COMMUNICATION, recordIdsToSave);
+        }
+
+
     }
 
     /**
-     *
      * @param actionToRun
      * @param recordIds
      */
