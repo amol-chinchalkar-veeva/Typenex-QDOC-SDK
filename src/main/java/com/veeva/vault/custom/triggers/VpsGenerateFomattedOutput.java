@@ -42,13 +42,14 @@ public class VpsGenerateFomattedOutput implements RecordTrigger {
             String recordId = inputRecordChange.getNew().getValue(OBJFIELD_ID, ValueType.STRING);
             String stateName = inputRecordChange.getNew().getValue(OBJFIELD_STATE, ValueType.STRING);
             recordIdsToSave.add(recordId);
-            //process only in approved state
-            if (context.getRecordEvent().toString().equals((RecordEvent.AFTER_UPDATE).toString()) && stateName.equals(APPROVED_STATE)) {
+        }
+            //process only in while updating
+            if (context.getRecordEvent().toString().equals((RecordEvent.AFTER_UPDATE).toString()) ) {
                 if (!recordIdsToSave.isEmpty()) {
                     queueMessage(CONFIG_FO_ACTION_COMMUNICATION, recordIdsToSave);
                 }
             }
-        }
+
     }
 
     private void queueMessage(String actionToRun, List<String> recordIds) {
